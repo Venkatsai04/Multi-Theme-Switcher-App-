@@ -1,19 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit';
+// themeSlice.ts
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+
+export type ThemeName = 'theme1' | 'theme2' | 'theme3'; // ✅ Exported here
 
 interface ThemeState {
-  currentTheme: string;
+  currentTheme: ThemeName;
 }
 
 const initialState: ThemeState = {
-  currentTheme: 'theme1',
+  currentTheme: (localStorage.getItem('theme') as ThemeName) || 'theme1',
 };
 
 const themeSlice = createSlice({
   name: 'theme',
   initialState,
   reducers: {
-    setTheme: (state, action) => {
+    setTheme: (state, action: PayloadAction<ThemeName>) => {
       state.currentTheme = action.payload;
+      localStorage.setItem('theme', action.payload);
     },
   },
 });

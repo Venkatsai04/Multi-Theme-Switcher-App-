@@ -1,14 +1,14 @@
 // themeSlice.ts
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-export type ThemeName = 'theme1' | 'theme2' | 'theme3'; // ✅ Exported here
+export type ThemeName = 'Minimalist' | 'Dark Knight' | 'Modren'; 
 
 interface ThemeState {
   currentTheme: ThemeName;
 }
 
 const initialState: ThemeState = {
-  currentTheme: (localStorage.getItem('theme') as ThemeName) || 'theme1',
+  currentTheme: (localStorage.getItem('theme') as ThemeName) || 'Minimalist',
 };
 
 const themeSlice = createSlice({

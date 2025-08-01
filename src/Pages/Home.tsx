@@ -10,6 +10,9 @@ const Home = () => {
   const handleThemeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selected = e.target.value as ThemeName;
     dispatch(setTheme(selected));
+    console.log('Theme changed to:', selected);
+    console.log('Stored in localStorage:', localStorage.getItem('theme'));
+
   };
 
   return (
@@ -36,9 +39,9 @@ const Home = () => {
               onChange={handleThemeChange}
               className="form-input flex w-full flex-1 rounded-xl border border-[#dde0e4] bg-white h-14 p-[15px] text-base font-normal leading-normal text-[#121417] placeholder:text-[#677583] focus:outline-none focus:ring-0"
             >
-              <option value="theme1">Minimalist (Theme 1)</option>
-              <option value="theme2">Dark Sidebar (Theme 2)</option>
-              <option value="theme3">Colorful Cards (Theme 3)</option>
+              <option value="theme1">Minimalist</option>
+              <option value="theme2">Dark Knight</option>
+              <option value="theme3">Modren </option>
             </select>
           </label>
         </div>

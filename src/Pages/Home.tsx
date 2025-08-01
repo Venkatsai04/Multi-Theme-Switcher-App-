@@ -1,11 +1,14 @@
 // Home.tsx
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState } from '../store';
 import { setTheme, type ThemeName } from '../slices/themeSlice';
+import ProductCard from '../components/Product';
 
 const Home = () => {
   const dispatch = useDispatch();
   const currentTheme = useSelector((state: RootState) => state.theme.currentTheme);
+  const [products, setProducts] = useState([]);
 
   const handleThemeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selected = e.target.value as ThemeName;
@@ -14,6 +17,14 @@ const Home = () => {
     console.log('Stored in localStorage:', localStorage.getItem('theme'));
 
   };
+
+
+  useEffect(() => {
+    fetch('https://fakestoreapi.com/products')
+      .then((res) => res.json())
+      .then((data) => setProducts(data))
+      .catch((err) => console.error('Failed to fetch products', err));
+  }, []);
 
   return (
     <div
@@ -58,39 +69,12 @@ const Home = () => {
           Explore the features and enjoy the experience. We're excited to have you on board.
         </p>
 
-        <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4 scale-90">
-          {/* Quick Access Card */}
-          <div
-            className="bg-cover bg-center flex flex-col items-stretch justify-end rounded-xl pt-[132px]"
-            style={{
-              backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)), url("https://lh3.googleusercontent.com/aida-public/AB6AXuD_Sn0MSjlN33B6TuHNX-7ksgfYFlNTToii5NM5A3WEi-vaIBy5ZCiuHrGK0sB6A73ka1o0ZQS6BawQtOtwJy30_kTQN_kSjVbEsu7LnWBnd-zKT6ejJ554Yl760DByHiIfQvYcPMhaRPNBPqp9m65Xuv2uEYiKVZxkQ1ZXgDlc1cK-FsFaPgCxEg6FybUcVXbSWZAx2dhKaYiwwmgeyreNA0aG20PzpoSZQMb07iwHgB1b6vsr8LRWz0PzeCWHxCtjt2v7dEjAsady")`,
-            }}
-          >
-            <div className="flex w-full items-end justify-between gap-4 p-4">
-              <div className="flex max-w-[440px] flex-1 flex-col gap-1">
-                <p className="text-white text-2xl font-bold leading-tight">Quick Access</p>
-                <p className="text-white text-base font-medium leading-normal">
-                  Jump to your most used features
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Notifications Card */}
-          <div
-            className="bg-cover bg-center flex flex-col items-stretch justify-end rounded-xl pt-[132px]"
-            style={{
-              backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)), url("https://lh3.googleusercontent.com/aida-public/AB6AXuAy0YiRiMp_crMoCLnIs7-s2saB4Xgo1vgLgh2qETYHIaLluu-W9NhkyjyA-lhojrCsBK9sJLB3LqXu5VAUkrUJjsLPRIyv4IVwWfEZ4wcNdgJKqOxSDlgjq2CDhAfJSEDzMIDoA-KCM41OO1krvRkiGnfotrxmZ5do9-B7QAkSlYMmp9MFwgOffY5I6P0jNfY0bmx2zwFrqHCaFX0zJ4_dIuq3BtbP6lqwCIqG7Z0L48FS0WgamygocJ6CckTJYGrpniMjg2Zrlzqy")`,
-            }}
-          >
-            <div className="flex w-full items-end justify-between gap-4 p-4">
-              <div className="flex max-w-[440px] flex-1 flex-col gap-1">
-                <p className="text-white text-2xl font-bold leading-tight">Notifications</p>
-                <p className="text-white text-base font-medium leading-normal">
-                  Stay updated with recent activities
-                </p>
-              </div>
-            </div>
+        <div className="p-4">
+          <h2 className="text-2xl font-bold mb-4 text-center">Our Products</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
           </div>
         </div>
 

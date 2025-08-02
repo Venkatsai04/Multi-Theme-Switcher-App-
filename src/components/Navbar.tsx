@@ -60,7 +60,7 @@ const Navbar = ({ currentTheme, handleThemeChange }: NavbarProps) => {
       <div className="md:hidden">
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="text-gray-600 hover:text-gray-800 focus:outline-none"
+          className="text-gray-600 hover:text-gray-800 focus:outline-none scale-125"
         >
           ☰
         </button>
@@ -68,7 +68,7 @@ const Navbar = ({ currentTheme, handleThemeChange }: NavbarProps) => {
 
       {/* Mobile Sidebar */}
       {menuOpen && (
-        <div className="absolute top-16 right-4 bg-white border rounded-lg shadow-md p-4 space-y-3 w-40 md:hidden z-50">
+        <div className={`${TextTheme} absolute top-16 right-4 ${BgTheme} border rounded-lg shadow-md p-4 space-y-3 w-40 md:hidden z-50`}>
           <Link to="/" className="block hover:text-yellow-500" onClick={() => setMenuOpen(false)}>Home</Link>
           <Link to="/about" className="block hover:text-yellow-500" onClick={() => setMenuOpen(false)}>About</Link>
           <Link to="/contact" className="block hover:text-yellow-500" onClick={() => setMenuOpen(false)}>Contact</Link>

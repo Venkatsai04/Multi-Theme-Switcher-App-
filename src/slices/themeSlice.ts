@@ -1,7 +1,7 @@
-// themeSlice.ts
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-export type ThemeName = 'Minimalist' | 'Dark Knight' | 'Modren'; 
+// Correct the spelling of 'Modren' to 'Modern'
+export type ThemeName = 'Minimalist' | 'Dark' | 'Modern'; 
 
 interface ThemeState {
   currentTheme: ThemeName;

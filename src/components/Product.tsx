@@ -1,34 +1,29 @@
-// import React from 'react';
-
-type Product = {
-  id: number;
+// src/components/Product.tsx
+import React from 'react';
+    
+type ProductProps = {
   title: string;
-  price: number;
-  description: string;
-  category: string;
+  price: string;
   image: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
 };
 
-const ProductCard = ({ product }: { product: Product }) => {
+const Product: React.FC<ProductProps> = ({ title, price, image }) => {
   return (
-    <div className="rounded-xl shadow-md bg-white p-4 flex flex-col gap-2 hover:shadow-lg transition">
-      <img
-        src={product.image}
-        alt={product.title}
-        className="h-40 object-contain mx-auto"
-      />
-      <h3 className="font-bold text-sm line-clamp-2">{product.title}</h3>
-      <p className="text-gray-500 text-xs line-clamp-3">{product.description}</p>
-      <div className="flex justify-between items-center mt-2">
-        <span className="font-semibold text-amber-600">${product.price}</span>
-        <span className="text-xs text-gray-400">{product.rating.rate} ⭐ ({product.rating.count})</span>
+    <div className="p-4 rounded shadow-sm bg-white flex flex-col gap-4 h-full">
+      <div
+        className="w-full aspect-video bg-cover bg-center bg-no-repeat rounded"
+        style={{ backgroundImage: `url(${image})` }}
+      ></div>
+      <div className="flex flex-col gap-2">
+        <p className="text-[#60758a] text-sm font-normal leading-normal">Featured</p>
+        <p className="text-[#111418] text-base font-bold leading-tight">{title}</p>
+        <p className="text-[#60758a] text-sm font-normal leading-normal">${price}</p>
       </div>
+      <button className="mt-auto bg-[#f0f2f5] text-[#111418] rounded px-4 h-8 w-fit text-sm font-medium">
+        Add to Cart
+      </button>
     </div>
   );
 };
 
-export default ProductCard;
+export default Product;

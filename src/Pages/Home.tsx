@@ -1,93 +1,102 @@
-// Home.tsx
-import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState } from '../store';
 import { setTheme, type ThemeName } from '../slices/themeSlice';
-import ProductCard from '../components/Product';
+import Product from '../components/Product';
+import Navbar from '../components/Navbar';
+import { useState, useEffect } from 'react';
 
 const Home = () => {
   const dispatch = useDispatch();
+  const [BgTheme, setBgTheme] = useState('bg-[#fffce1]')
+  const [TextTheme, setTextTheme] = useState('text-black')
   const currentTheme = useSelector((state: RootState) => state.theme.currentTheme);
-  const [products, setProducts] = useState([]);
 
   const handleThemeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selected = e.target.value as ThemeName;
     dispatch(setTheme(selected));
-    console.log('Theme changed to:', selected);
-    console.log('Stored in localStorage:', localStorage.getItem('theme'));
+    // You can add a console.log here to see the new theme being dispatched
+    console.log('Dispatching theme:', selected);
+    // console.log(BgTheme);
+    
+  }
+  
+ // Home.tsx
+// ... (rest of the component)
 
-  };
+useEffect(() => {
+  console.log('Current theme from Redux:', currentTheme);
+  if (currentTheme == 'Minimalist') {
+    setBgTheme('bg-[#fffce1]')
+    setTextTheme('text-black')
+  }
+  else if(currentTheme == 'Dark'){
+    setBgTheme('bg-[#000027]')
+    setTextTheme('text-white') 
+  }
+  else if(currentTheme == 'Modern'){ 
+    setBgTheme('bg-[#ffeb3b]')
+    setTextTheme('text-black')
+  }
+}, [currentTheme]);
 
-
-  useEffect(() => {
-    fetch('https://fakestoreapi.com/products')
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((err) => console.error('Failed to fetch products', err));
-  }, []);
+// ... (rest of the component)
+  const products = [
+    {
+      title: 'Product 1',
+      price: '$29.99 · ★ 4.5',
+      image:
+        'https://lh3.googleusercontent.com/aida-public/AB6AXuC8oc_Fp5y6Z3IZDnTxNATU3-dVChSU9nY_qmJh8gRDmZ7vkAdiDIe7kOABA9YgBXaYyJIsYveQDF-zFHmEBt0ryVsx7Xhch6Q8OmS-fpQC6_k6IA4UAstVrtbExGEjWVgld1_Yj2LuM1GO8gtGo7kYwGgdZwXiRv0szjlFO5AbWE-g-pZ8fPXW534v9JzbBvCIs6kDEstw40bTkoVoMNI6d_ELJDlJTx7V-trSpqdwRL2rCBEDydqxvaiaxoZy41lVR2fTPbox7vWl',
+    },
+    {
+      title: 'Product 2',
+      price: '$49.99 · ★ 4.2',
+      image:
+        'https://lh3.googleusercontent.com/aida-public/AB6AXuBK7gNj8i_6q47YyCHxdlUYEF9W9wPpA2xTNAj7lMfFYzBbxwJUL0jfneG40JmEZKCMbw4y_7IMPO2MX6n08fOXqYLASwfgR7q_J4pUPtRdiceLtS8JtRERR6iZmbjDgCYUkuaBwiw1vpHpqG0yWsd-1VsOa1K7ThYLGDY3ONa5zT5ET8SKAzjhiEsE3pEpa1rSaRyHT-NofXTuvc68mvOIw3z7hFbeeEjbE2q513Ghs0yhYPsDr8KIEoCoRMNkYkhK5yXUDKlWRlEM',
+    },
+    {
+      title: 'Product 3',
+      price: '$19.99 · ★ 4.8',
+      image:
+        'https://lh3.googleusercontent.com/aida-public/AB6AXuAR9Nd9jzLUlkB9Dr-u4TG3ovEiIFvADG8iIcwNNp1mieMSBeVXi-Tofeq9rVgoJ55yarrnqfwrt3Ds8GTlOaBQR6wuHHwD0_HGNFfE6DfhyVqmM-KoG8mBiAFEZgn5pkZ0iGzX1wbGvtQB44y7_v8oSFqhlCqGd2IeBY4rmDedr4-WQihLyfMHyJZrJtayDiJMXg3p_Bv5a6pvGjvMGMdfNg0l1SA95uppXf-6_qRcyW044n7fUBNTbn_s4d3OpxnYYYnVs8fL1xh5',
+    },
+  ];
 
   return (
     <div
-      className="relative flex min-h-screen flex-col justify-between overflow-x-hidden bg-white"
-      style={{
-        fontFamily: 'Inter, Noto Sans, sans-serif',
-      }}
+      className={`relative flex min-h-screen flex-col justify-between overflow-x-hidden ${BgTheme} ${TextTheme} `}
+      style={{ fontFamily: 'Inter, Noto Sans, sans-serif' }}
     >
-
       <div>
-        <div className="flex items-center justify-between bg-white px-4 py-2 mt-2 gap-4">
-          {/* App Logo/Title */}
-          <h2 className="text-[#121417] text-lg font-bold leading-tight tracking-[-0.015em] text-center flex-1">
-            <span>
-              Switch
-              <span className="font-extrabold text-amber-500">X</span>
-            </span>
-          </h2>
-
-          {/* Theme Switcher */}
-          <div className="w-full max-w-[200px]">
-            <label className="w-full">
-              <select
-                value={currentTheme}
-                onChange={handleThemeChange}
-                className="form-input w-full rounded-xl border border-[#dde0e4] bg-white h-14 px-4 text-base text-[#121417] placeholder:text-[#677583] focus:outline-none focus:ring-0"
-              >
-                <option value="theme1">Minimalist</option>
-                <option value="theme2">Dark Knight</option>
-                <option value="theme3">Modern</option>
-              </select>
-            </label>
-          </div>
-        </div>
-
-
-
-        <h1 className="text-[#121417] text-[22px] font-bold text-center px-4 pb-3 pt-5">
-          Welcome to Our App
-        </h1>
-        <p className="text-[#121417] text-base text-center px-4 pb-3 pt-1">
-          Explore the features and enjoy the experience. We're excited to have you on board.
-        </p>
+        <Navbar currentTheme={currentTheme} handleThemeChange={handleThemeChange} />
 
         <div className="p-4">
-          <h2 className="text-2xl font-bold mb-4 text-center">Our Products</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+          <div className="bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center min-h-[480px] gap-6 rounded-xl p-4" style={{
+            backgroundImage:
+              'linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4)), url("https://lh3.googleusercontent.com/aida-public/AB6AXuD_Sn0MSjlN33B6TuHNX-7ksgfYFlNTToii5NM5A3WEi-vaIBy5ZCiuHrGK0sB6A73ka1o0ZQS6BawQtOtwJy30_kTQN_kSjVbEsu7LnWBnd-zKT6ejJ554Yl760DByHiIfQvYcPMhaRPNBPqp9m65Xuv2uEYiKVZxkQ1ZXgDlc1cK-FsFaPgCxEg6FybUcVXbSWZAx2dhKaYiwwmgeyreNA0aG20PzpoSZQMb07iwHgB1b6vsr8LRWz0PzeCWHxCtjt2v7dEjAsady")'
+          }}>
+            <div className="flex flex-col gap-2 text-center">
+              <h1 className="text-white text-4xl font-black leading-tight tracking-[-0.033em]">Welcome to Our App</h1>
+              <h2 className="text-white text-sm font-normal leading-normal">
+                Explore the features and enjoy the experience. We're excited to have you on board.
+              </h2>
+            </div>
+            <button className="bg-[#3490f3] rounded px-4 py-2 text-white text-sm font-bold">Get Started</button>
           </div>
         </div>
 
-        <div className="flex px-4 py-3 justify-center">
-          <button className="min-w-[84px] rounded-xl bg-[#d2e2f3] px-4 py-2 text-sm font-bold text-[#121417] cursor-pointer scale-120">
-            Get Started
-          </button>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+          {products.map((product, index) => (
+            <Product
+              key={index}
+              title={product.title}
+              price={product.price}
+              image={product.image}
+            />
+          ))}
         </div>
       </div>
-
-
     </div>
   );
-};
+}
 
 export default Home;

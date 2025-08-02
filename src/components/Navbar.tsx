@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
 
 interface NavbarProps {
   currentTheme: string;
@@ -7,13 +8,33 @@ interface NavbarProps {
 }
 
 const Navbar = ({ currentTheme, handleThemeChange }: NavbarProps) => {
+
+
   const [menuOpen, setMenuOpen] = useState(false);
+  const [BgTheme, setBgTheme] = useState('bg-[#e4f2ff]')
+  const [TextTheme, setTextTheme] = useState('text-black')
+
+  useEffect(() => {
+    console.log('Current theme from Redux:', currentTheme);
+    if (currentTheme == 'Minimalist') {
+      setBgTheme('bg-[#e4f2ff]')
+      setTextTheme('text-black')
+    }
+    else if (currentTheme == 'Dark') {
+      setBgTheme('bg-[#000027]')
+      setTextTheme('text-white')
+    }
+    else if (currentTheme == 'Modern') {
+      setBgTheme('bg-[#ffeb3b]')
+      setTextTheme('text-black')
+    }
+  }, [currentTheme]);
 
   return (
-    <nav className="bg-white border-b border-gray-200 p-4 flex items-center justify-between">
+    <nav className={`${BgTheme} ${TextTheme} border-b border-gray-200 p-4 flex items-center justify-between`}>
       {/* Logo & Dropdown */}
       <div className="flex items-center gap-4">
-        <h2 className="text-[#121417] text-lg font-bold leading-tight tracking-[-0.015em]">
+        <h2 className={`${TextTheme} text-lg font-bold leading-tight tracking-[-0.015em]`}>
           Switch<span className="text-yellow-500">X</span>
         </h2>
 
@@ -29,10 +50,10 @@ const Navbar = ({ currentTheme, handleThemeChange }: NavbarProps) => {
       </div>
 
       {/* Desktop Links */}
-      <div className="hidden md:flex gap-6 text-sm font-medium text-gray-700">
-        <Link to="/" className="hover:text-yellow-500">Home</Link>
-        <Link to="/about" className="hover:text-yellow-500">About</Link>
-        <Link to="/contact" className="hover:text-yellow-500">Contact</Link>
+      <div className={`hidden md:flex gap-6 text-l font-medium ${TextTheme} pr-3`}>
+        <Link to="/" className="hover:bg-yellow-500 p-2 rounded-xl">Home</Link>
+        <Link to="/about" className="hover:bg-yellow-500 p-2 rounded-xl">About</Link>
+        <Link to="/contact" className="hover:bg-yellow-500 p-2 rounded-xl">Contact</Link>
       </div>
 
       {/* Mobile Menu Toggle */}

@@ -7,39 +7,36 @@ import { useState, useEffect } from 'react';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const [BgTheme, setBgTheme] = useState('bg-[#fffce1]')
+  const [BgTheme, setBgTheme] = useState('bg-[#e4f2ff]')
   const [TextTheme, setTextTheme] = useState('text-black')
   const currentTheme = useSelector((state: RootState) => state.theme.currentTheme);
 
   const handleThemeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selected = e.target.value as ThemeName;
     dispatch(setTheme(selected));
-    // You can add a console.log here to see the new theme being dispatched
     console.log('Dispatching theme:', selected);
-    // console.log(BgTheme);
-    
-  }
-  
- // Home.tsx
-// ... (rest of the component)
 
-useEffect(() => {
-  console.log('Current theme from Redux:', currentTheme);
-  if (currentTheme == 'Minimalist') {
-    setBgTheme('bg-[#fffce1]')
-    setTextTheme('text-black')
-  }
-  else if(currentTheme == 'Dark'){
-    setBgTheme('bg-[#000027]')
-    setTextTheme('text-white') 
-  }
-  else if(currentTheme == 'Modern'){ 
-    setBgTheme('bg-[#ffeb3b]')
-    setTextTheme('text-black')
-  }
-}, [currentTheme]);
 
-// ... (rest of the component)
+  }
+
+
+  useEffect(() => {
+    console.log('Current theme from Redux:', currentTheme);
+    if (currentTheme == 'Minimalist') {
+      setBgTheme('bg-[#e4f2ff]')
+      setTextTheme('text-black')
+    }
+    else if (currentTheme == 'Dark') {
+      setBgTheme('bg-[#000027]')
+      setTextTheme('text-white')
+    }
+    else if (currentTheme == 'Modern') {
+      setBgTheme('bg-[#ffeb3b]')
+      setTextTheme('text-black')
+    }
+  }, [currentTheme]);
+
+
   const products = [
     {
       title: 'Product 1',
@@ -70,12 +67,12 @@ useEffect(() => {
         <Navbar currentTheme={currentTheme} handleThemeChange={handleThemeChange} />
 
         <div className="p-4">
-          <div className="bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center min-h-[480px] gap-6 rounded-xl p-4" style={{
+          <div className={`${currentTheme == 'Dark' ? 'p-0 saturate-200' : 'grayscale-0'} ${currentTheme == 'Modern' ? 'p-0 hue-rotate-270' : 'grayscale-0'} bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center min-h-[480px] gap-6 rounded-xl p-4`} style={{
             backgroundImage:
               'linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4)), url("https://lh3.googleusercontent.com/aida-public/AB6AXuD_Sn0MSjlN33B6TuHNX-7ksgfYFlNTToii5NM5A3WEi-vaIBy5ZCiuHrGK0sB6A73ka1o0ZQS6BawQtOtwJy30_kTQN_kSjVbEsu7LnWBnd-zKT6ejJ554Yl760DByHiIfQvYcPMhaRPNBPqp9m65Xuv2uEYiKVZxkQ1ZXgDlc1cK-FsFaPgCxEg6FybUcVXbSWZAx2dhKaYiwwmgeyreNA0aG20PzpoSZQMb07iwHgB1b6vsr8LRWz0PzeCWHxCtjt2v7dEjAsady")'
           }}>
             <div className="flex flex-col gap-2 text-center">
-              <h1 className="text-white text-4xl font-black leading-tight tracking-[-0.033em]">Welcome to Our App</h1>
+              <h1 className={`${TextTheme} text-4xl font-black leading-tight tracking-[-0.033em]`}>Welcome to Our App</h1>
               <h2 className="text-white text-sm font-normal leading-normal">
                 Explore the features and enjoy the experience. We're excited to have you on board.
               </h2>

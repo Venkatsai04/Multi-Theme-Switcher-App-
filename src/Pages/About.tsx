@@ -55,7 +55,7 @@ const About = () => {
         <div>
           <Section title="The Technology" textColor={textColor} secondaryTextColor={secondaryTextColor}>
             <p>
-              Under the hood, SwitchX uses **React**, **Redux**, and **Tailwind CSS**. We've combined these powerful tools to create a robust and scalable theme management system. The current theme state is stored in Redux and persisted in your browser's local storage, so your preferences are saved across sessions.
+              Under the hood, SwitchX uses  <b>React</b>, <b>Redux</b>, and <b>Tailwind CSS</b>. We've combined these powerful tools to create a robust and scalable theme management system. The current theme state is stored in Redux and persisted in your browser's local storage, so your preferences are saved across sessions.
             </p>
           </Section>
         </div>

@@ -7,10 +7,10 @@ type ProductProps = {
   price: string;
   image: string;
   layout?: string;
-  isFirst?: boolean;
+  index: number;
 };
 
-const Product: React.FC<ProductProps> = ({ title, price, image, layout, isFirst }) => {
+const Product: React.FC<ProductProps> = ({ title, price, image, layout, index }) => {
   const currentTheme = useSelector((state: RootState) => state.theme.currentTheme);
   
   const themeStyles = {
@@ -29,10 +29,10 @@ const Product: React.FC<ProductProps> = ({ title, price, image, layout, isFirst 
       font: 'font-serif',
     },
     Modern: {
-      card: 'bg-[#ffde22] shadow-2xl border-4 border-black transform hover:scale-102',
+      card: 'bg-[#ffde22] shadow-2xl transform hover:scale-102',
       text: 'text-black',
       subheading: 'text-black/80',
-      button: 'bg-black text-white hover:bg-gray-800 border-2 border-white',
+      button: 'bg-black text-white hover:bg-gray-800 border-white',
       font: 'font-pacifico',
     },
   };
@@ -40,10 +40,16 @@ const Product: React.FC<ProductProps> = ({ title, price, image, layout, isFirst 
   const currentStyles = themeStyles[currentTheme] || themeStyles.Minimalist;
   
   let productLayoutClasses = '';
-  if (layout === 'Dark' && isFirst) {
-    productLayoutClasses = 'lg:col-span-2 lg:row-span-2';
-  } else if (layout === 'Modern' && isFirst) {
-    productLayoutClasses = 'lg:col-span-1 lg:row-span-2';
+  if (layout === 'Dark') {
+    // Repeating pattern: large card, then two small cards
+    if (index % 3 === 0) {
+      productLayoutClasses = 'lg:col-span-2';
+    }
+  } else if (layout === 'Modern') {
+    // Repeating pattern: a large card, followed by three small cards
+    if (index % 4 === 0) {
+      productLayoutClasses = 'lg:col-span-2';
+    }
   }
 
   return (

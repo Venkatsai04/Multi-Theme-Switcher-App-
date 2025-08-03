@@ -40,17 +40,17 @@ const Home = () => {
     fetchProducts();
   }, []);
 
-  // Dynamically set the grid layout for large screens
-  let layoutClasses = "grid grid-cols-1 sm:grid-cols-2 gap-6 p-4";
+  // Set the base grid structure for each theme
+  let layoutClasses = "grid grid-cols-1 sm:grid-cols-2 gap-6 p-4 ";
   if (currentTheme === "Minimalist") {
-    // Symmetrical, 3-column grid for a clean look
+    // Symmetrical 3-column grid
     layoutClasses += " lg:grid-cols-3";
   } else if (currentTheme === "Dark") {
-    // A complex, 4-column layout where some items span multiple columns
-    layoutClasses += " lg:grid-cols-4 lg:grid-rows-3";
+    // A 2-column grid for the custom layout
+    layoutClasses += " lg:grid-cols-2";
   } else if (currentTheme === "Modern") {
-    // A 3-column grid with a prominent first item spanning multiple rows
-    layoutClasses += " lg:grid-cols-3 lg:grid-rows-2";
+    // A 3-column grid for the custom layout
+    layoutClasses += " lg:grid-cols-3";
   }
 
   return (
@@ -101,7 +101,7 @@ const Home = () => {
               price={`$${product.price.toFixed(2)} · ★ ${product.rating.rate.toFixed(1)}`}
               image={product.image}
               layout={currentTheme}
-              isFirst={index === 0}
+              index={index}
             />
           ))}
         </div>

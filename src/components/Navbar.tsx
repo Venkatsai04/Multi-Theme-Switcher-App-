@@ -20,7 +20,7 @@ const Navbar = ({ currentTheme, handleThemeChange }: NavbarProps) => {
 
 
   return (
-    <div className={`min-w-full flex items-center justify-between px-6 py-4 border-b z-50`}>
+    <div className={`min-w-full flex items-center justify-between px-6 py-4 border-b z-50 fixed ${mobileMenuBg}`}>
       {/* Logo + Theme Switcher */}
       <div className="flex items-center gap-4">
         <h2 className="text-xl font-bold">

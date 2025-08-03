@@ -1,40 +1,16 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import type { RootState } from '../store';
-import { setTheme, type ThemeName } from '../slices/themeSlice';
 import Product from '../components/Product';
-import Navbar from '../components/Navbar';
-import { useState, useEffect } from 'react';
+
 
 const Home = () => {
-  const dispatch = useDispatch();
-  const [BgTheme, setBgTheme] = useState('bg-[#e4f2ff]')
-  const [TextTheme, setTextTheme] = useState('text-black')
   const currentTheme = useSelector((state: RootState) => state.theme.currentTheme);
-
-  const handleThemeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selected = e.target.value as ThemeName;
-    dispatch(setTheme(selected));
-    console.log('Dispatching theme:', selected);
-
-
-  }
-
-
-  useEffect(() => {
-    if (currentTheme === "Minimalist") {
-      setBgTheme("bg-white");
-      setTextTheme("text-black");
-    } else if (currentTheme === "Dark") {
-      setBgTheme("bg-[#000027]");
-      setTextTheme("text-white");
-    } else if (currentTheme === "Modern") {
-      setBgTheme("bg-[#ffde22]");
-      setTextTheme("text-black");
-    }
-  }, [currentTheme]);
-
+  
+  // Remove useState and useEffect for BgTheme and TextTheme.
+  // The global layout now handles this.
 
   const products = [
+    // ... (Your products array is unchanged)
     {
       title: 'Product 1',
       price: '$29.99 · ★ 4.5',
@@ -62,59 +38,45 @@ const Home = () => {
   ];
 
   return (
-    <div
-      className={`relative flex min-h-screen flex-col justify-between overflow-x-hidden ${BgTheme} ${TextTheme} `}
-      style={{
-        fontFamily:
-          currentTheme === 'Dark'
-            ? 'serif'
-            : currentTheme === 'Modern'
-              ? '"Pacifico", cursive'
-              : 'sans-serif',
-      }}
-    >
-      <div>
-        <Navbar currentTheme={currentTheme} handleThemeChange={handleThemeChange} />
-
-        <div className={`flex flex-col md:flex-row w-full h-[100vh] p-6 gap-4 items-center justify-center ${BgTheme} ${TextTheme} transition-colors duration-500`}>
-          {/* Left Side: Heading and Text */}
-          <div className="flex-1 flex flex-col justify-center items-start p-6 animate-fade-in">
-            <h1
-              className={`${TextTheme} text-4xl md:text-5xl font-black leading-tight tracking-[-0.03em] mb-4 transition-colors duration-500`}
-            >
-              Welcome to Our App
-            </h1>
-            <p
-              className={`${TextTheme} text-base md:text-lg mb-6 transition-colors duration-500`}
-            >
-              Instantly switch between beautiful themes with a single click. Explore
-              Minimal, Dark, and Modern styles — tailor your interface to your mood,
-              your vibe, your way.
-            </p>
-           <button type="button" className="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Get Started</button>
-          </div>
-
-          {/* Right Side: Background Image */}
-          <div
-            className={`mt-[-50px] flex-1 rounded-xl bg-center bg-no-repeat bg-cover w-full h-[300px] md:h-[80%] transition-all duration-700 ease-in-out ${currentTheme === "Dark"
-                ? "bg-[url('/Dark.svg')]"
-                : currentTheme === "Modern"
-                  ? "bg-[url('/Modern.svg')]"
-                  : "bg-[url('/Minimal.svg')]"
-              }`}
-          ></div>
+    <div>
+      <div className={`flex flex-col md:flex-row w-full h-[100vh] p-6 gap-4 items-center justify-center transition-colors duration-500 `}>
+        {/* Left Side: Heading and Text */}
+        <div className="flex-1 flex flex-col justify-center items-start p-6 animate-fade-in mt-[-100px]">
+          <h1
+            className="text-4xl md:text-5xl font-black leading-tight tracking-[-0.03em] mb-4 transition-colors duration-500"
+          >
+            Welcome to Our App
+          </h1>
+          <p
+            className="text-base md:text-lg mb-6 transition-colors duration-500"
+          >
+            Instantly switch between beautiful themes with a single click. Explore
+            Minimal, Dark, and Modern styles — tailor your interface to your mood,
+            your vibe, your way.
+          </p>
+          <button type="button" className="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Get Started</button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-          {products.map((product, index) => (
-            <Product
-              key={index}
-              title={product.title}
-              price={product.price}
-              image={product.image}
-            />
-          ))}
-        </div>
+        {/* Right Side: Background Image */}
+        <div
+          className={`mt-[-120px] flex-1 rounded-xl bg-center bg-no-repeat bg-cover w-full h-[300px] md:h-[80%] transition-all duration-700 ease-in-out ${currentTheme === "Dark"
+              ? "bg-[url('/Dark.svg')]"
+              : currentTheme === "Modern"
+                ? "bg-[url('/Modern.svg')]"
+                : "bg-[url('/Minimal.svg')]"
+            }`}
+        ></div>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+        {products.map((product, index) => (
+          <Product
+            key={index}
+            title={product.title}
+            price={product.price}
+            image={product.image}
+          />
+        ))}
       </div>
     </div>
   );

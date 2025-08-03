@@ -1,14 +1,18 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-// Correct the spelling of 'Modren' to 'Modern'
-export type ThemeName = 'Minimalist' | 'Dark' | 'Modern'; 
+export type ThemeName = 'Minimalist' | 'Dark' | 'Modern';
 
 interface ThemeState {
   currentTheme: ThemeName;
 }
 
+const getInitialTheme = (): ThemeName => {
+  const storedTheme = localStorage.getItem('theme');
+  return (storedTheme as ThemeName) || 'Minimalist';
+};
+
 const initialState: ThemeState = {
-  currentTheme: (localStorage.getItem('theme') as ThemeName) || 'Minimalist',
+  currentTheme: getInitialTheme(),
 };
 
 const themeSlice = createSlice({

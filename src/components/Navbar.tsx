@@ -1,31 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import type { ThemeName } from '../slices/themeSlice';
 
 interface NavbarProps {
-  currentTheme: string;
+  currentTheme: ThemeName;
   handleThemeChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const Navbar = ({ currentTheme, handleThemeChange }: NavbarProps) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [BgTheme, setBgTheme] = useState("bg-sky-100");
-  const [TextTheme, setTextTheme] = useState("text-black");
 
-  useEffect(() => {
-    if (currentTheme === "Minimalist") {
-      setBgTheme("bg-white");
-      setTextTheme("text-black");
-    } else if (currentTheme === "Dark") {
-      setBgTheme("bg-[#000027]");
-      setTextTheme("text-white");
-    } else if (currentTheme === "Modern") {
-      setBgTheme("bg-[#ffde22]");
-      setTextTheme("text-black");
-    }
-  }, [currentTheme]);
+  // Derive the colors for the dropdown based on the current theme
+  const dropdownBg = currentTheme === 'Dark' ? 'bg-[#000027]' : 'bg-white';
+  const dropdownText = currentTheme === 'Dark' ? 'text-white' : 'text-black';
+  const dropdownBorder = currentTheme === 'Dark' ? 'border-white' : 'border-[#dde0e4]';
 
   return (
-    <div className={`min-w-full flex items-center justify-between px-6 py-4 ${BgTheme} ${TextTheme} border-b`}>
+    <div className={`min-w-full flex items-center justify-between px-6 py-4 border-b z-50`}>
       {/* Logo + Theme Switcher */}
       <div className="flex items-center gap-4">
         <h2 className="text-xl font-bold">
@@ -34,7 +25,7 @@ const Navbar = ({ currentTheme, handleThemeChange }: NavbarProps) => {
         <select
           value={currentTheme}
           onChange={handleThemeChange}
-          className="form-input rounded-xl border border-[#dde0e4] bg-white h-10 px-3 text-sm text-[#121417] focus:outline-none focus:ring-0"
+          className={`form-input rounded-xl h-10 px-3 text-sm focus:outline-none focus:ring-0 ${dropdownBg} ${dropdownText} ${dropdownBorder}`}
         >
           <option value="Minimalist">Minimalist (Theme 1)</option>
           <option value="Dark">Dark (Theme 2)</option>

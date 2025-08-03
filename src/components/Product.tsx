@@ -27,7 +27,7 @@ const Product: React.FC<ProductProps> = ({ title, price, image }) => {
       setSubheadingTheme('text-white/80');
       setButtonTheme('bg-[#1a1a45] text-white');
     } else if (currentTheme === 'Modern') {
-      setCardTheme('bg-[#ffeb3b]');
+      setCardTheme('bg-[#ffde22]');
       setTextTheme('text-black');
       setSubheadingTheme('text-black/80');
       setButtonTheme('bg-black text-white');

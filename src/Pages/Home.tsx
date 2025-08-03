@@ -79,19 +79,35 @@ const Home = () => {
       <div>
         <Navbar currentTheme={currentTheme} handleThemeChange={handleThemeChange} />
 
-        <div className="p-4">
-          <div className={`${currentTheme == 'Dark' ? 'p-0  bg-[url(dark.svg)]' : ''} ${currentTheme == 'Modern' ? 'p-0  bg-[url(Modern.svg)]' : ''}  bg-center bg-no-repeat flex flex-col items-center justify-center min-h-[480px] gap-6 rounded-xl p-4 bg-[url(Minimal.svg)]`}
-          >
-            <div className="flex flex-col gap-2 text-center">
-              <h1 className={`${TextTheme} text-5xl font-black leading-tight tracking-[-0.033em]`}>Welcome to Our App</h1>
-              <h2 className={`${TextTheme} text-l font-normal leading-normal`}>
-                Instantly switch between beautiful themes with a single click. Explore Minimal, Dark,
-                and Modern styles — tailor your interface to your mood, your vibe, your way.
-              </h2>
-            </div>
-
+        <div className="flex flex-col md:flex-row w-full h-[100vh] p-6 gap-4 items-center justify-center bg-sky-50 transition-colors duration-500">
+          {/* Left Side: Heading and Text */}
+          <div className="flex-1 flex flex-col justify-center items-start p-6 animate-fade-in">
+            <h1
+              className={`${TextTheme} text-4xl md:text-5xl font-black leading-tight tracking-[-0.03em] mb-4 transition-colors duration-500`}
+            >
+              Welcome to Our App
+            </h1>
+            <p
+              className={`${TextTheme} text-base md:text-lg mb-6 transition-colors duration-500`}
+            >
+              Instantly switch between beautiful themes with a single click. Explore
+              Minimal, Dark, and Modern styles — tailor your interface to your mood,
+              your vibe, your way.
+            </p>
+            <button className="bg-[#3490f3] rounded px-6 py-3 text-white text-sm font-bold hover:bg-[#2779bd] transition-colors duration-300">
+              Get Started
+            </button>
           </div>
-          <button className="bg-[#3490f3] mt-5 rounded px-4 py-2 text-white text-sm font-bold m-auto text-center flex ">Get Started</button>
+
+          {/* Right Side: Background Image */}
+          <div
+            className={`flex-1 rounded-xl bg-center bg-no-repeat bg-cover w-full h-[300px] md:h-[80%] transition-all duration-700 ease-in-out ${currentTheme === "Dark"
+                ? "bg-[url('/dark.svg')]"
+                : currentTheme === "Modern"
+                  ? "bg-[url('/Modern.svg')]"
+                  : "bg-[url('/Minimal.svg')]"
+              }`}
+          ></div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">

@@ -40,7 +40,7 @@ const Home = () => {
     <div>
       <div className={`flex flex-col md:flex-row w-full h-[100vh] p-6 gap-4 items-center justify-center transition-colors duration-500 `}>
      
-        <div className="flex-1 flex flex-col justify-center items-start p-6 animate-fade-in mt-[-100px]">
+        <div className="flex-1 flex flex-col justify-center items-start p-6 animate-fade-in max-sm:mt-[-50px] z-30">
           <h1
             className="text-4xl md:text-5xl font-black leading-tight tracking-[-0.03em] mb-4 transition-colors duration-500"
           >
@@ -57,10 +57,10 @@ const Home = () => {
         </div>
 
         <div
-          className={`mt-[-120px] flex-1 rounded-xl bg-center bg-no-repeat bg-cover w-full h-[400px] md:h-[80%] transition-all duration-700 ease-in-out ${currentTheme === "Dark"
-              ? "bg-[url('/Dark.svg')]"
+          className={`max-sm:mt-[-250px] scale-[1.2] flex-1  rounded-xl bg-center bg-no-repeat bg-cover w-full h-[400px] md:h-[80%] transition-all duration-700 ease-in-out ${currentTheme === "Dark"
+              ? "bg-[url('/Dark.png')]"
               : currentTheme === "Modern"
-                ? "bg-[url('/Modern.svg')]"
+                ? "bg-[url('/Modern.png')]"
                 : "bg-[url('/Minimal.png')]"
             }`}
         ></div>

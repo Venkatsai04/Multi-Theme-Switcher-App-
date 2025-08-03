@@ -32,15 +32,16 @@ const Navbar = ({ currentTheme, handleThemeChange }: NavbarProps) => {
         </select>
       </div>
 
-     
+      {/* Desktop Navigation Links */}
       <div className="hidden md:flex gap-6 font-medium">
         <Link to="/" className="hover:bg-yellow-500 p-2 rounded-xl">Home</Link>
         <Link to="/about" className="hover:bg-yellow-500 p-2 rounded-xl">About</Link>
         <Link to="/contact" className="hover:bg-yellow-500 p-2 rounded-xl">Contact</Link>
       </div>
 
-
-      <button onClick={() => setMenuOpen(!menuOpen)} className="relative group md:hidden z-30">
+      {/* Hamburger Button for Mobile */}
+      {/* Increased z-index to ensure it's always visible above the sliding menu */}
+      <button onClick={() => setMenuOpen(!menuOpen)} className="relative group md:hidden z-[60]"> {/* Changed z-30 to z-[60] */}
         <div className="relative z-20 flex items-center justify-center rounded-full w-[50px] h-[50px] transition-all bg-sky-400 ring-0 ring-gray-300 hover:ring-8 focus:ring-8 ring-opacity-30 duration-200 shadow-md">
           <div
             className={`flex flex-col justify-between w-[20px] h-[20px] transition-all duration-300 origin-center ${
@@ -60,28 +61,35 @@ const Navbar = ({ currentTheme, handleThemeChange }: NavbarProps) => {
             />
           </div>
         </div>
-
-        
-        <div
-          className={`absolute right-0 top-16 bg-white text-sky-700 shadow-xl rounded-md origin-top-right transform transition-all duration-300 ease-in-out ${
-            menuOpen
-              ? "opacity-100 scale-100 visible"
-              : "opacity-0 scale-90 invisible"
-          }`}
-        >
-          <ul className="text-sm divide-y p-2 w-40">
-            <li className="px-4 py-2 hover:bg-gray-100 rounded">
-              <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
-            </li>
-            <li className="px-4 py-2 hover:bg-gray-100 rounded">
-              <Link to="/about" onClick={() => setMenuOpen(false)}>About</Link>
-            </li>
-            <li className="px-4 py-2 hover:bg-gray-100 rounded">
-              <Link to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link>
-            </li>
-          </ul>
-        </div>
       </button>
+
+      {/* Mobile Menu Backdrop */}
+      {menuOpen && (
+        <div
+          className="fixed inset-0 bg-opacity-50 z-40 md:hidden"
+          onClick={() => setMenuOpen(false)}
+        ></div>
+      )}
+
+      {/* Mobile Menu (slides from right) */}
+      <div
+        className={`fixed top-0 right-0 h-full w-1/2 bg-white text-sky-700 shadow-xl transform transition-transform duration-300 ease-in-out z-50 md:hidden ${
+          menuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        {/* Removed the separate close button from here, as the animating hamburger/X button will now handle closing */}
+        <ul className="text-lg divide-y p-4 mt-[50px]">
+          <li className="px-4 py-3 hover:bg-gray-100 rounded">
+            <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
+          </li>
+          <li className="px-4 py-3 hover:bg-gray-100 rounded">
+            <Link to="/about" onClick={() => setMenuOpen(false)}>About</Link>
+          </li>
+          <li className="px-4 py-3 hover:bg-gray-100 rounded">
+            <Link to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };

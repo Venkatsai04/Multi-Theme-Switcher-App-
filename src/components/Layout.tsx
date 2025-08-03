@@ -32,13 +32,15 @@ const Layout = ({ children }: LayoutProps) => {
     fontFamily = '"Pacifico", cursive';
   }
   return (
-    <div
-      className={`relative flex min-h-screen flex-col justify-between overflow-x-hidden ${bgTheme} ${textTheme}`}
+   <div className={`${currentTheme == 'Dark' ? 'bg-white' : '' } ${currentTheme == 'Modern' ? 'bg-white' : '' } bg-white`}>
+     <div
+      className={`relative flex min-h-screen flex-col justify-between overflow-x-hidden ${bgTheme} ${textTheme} m-1 rounded-xl`}
       style={{ fontFamily }}
     >
       <Navbar currentTheme={currentTheme} handleThemeChange={handleThemeChange} />
       {children}
     </div>
+   </div>
   );
 };
 

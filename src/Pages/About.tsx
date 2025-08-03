@@ -75,7 +75,7 @@ const About = () => {
           </div>
           <div className="flex flex-col">
             <p className={`${textColor} font-bold`}>Venkat</p>
-            <p className={`${secondaryTextColor}`}>Software Developer</p>
+            <p className={`${secondaryTextColor}`}>Web Developer</p>
           </div>
         </div>
       </div>

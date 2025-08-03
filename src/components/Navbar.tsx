@@ -14,6 +14,11 @@ const Navbar = ({ currentTheme, handleThemeChange }: NavbarProps) => {
   const dropdownText = currentTheme === 'Dark' ? 'text-white' : 'text-black';
   const dropdownBorder = currentTheme === 'Dark' ? 'border-white' : 'border-[#dde0e4]';
 
+  // Theme-specific classes for the mobile menu
+  const mobileMenuBg = currentTheme === 'Dark' ? 'bg-[#000027]' : 'bg-white';
+  const mobileMenuText = currentTheme === 'Dark' ? 'text-white' : 'text-sky-700';
+
+
   return (
     <div className={`min-w-full flex items-center justify-between px-6 py-4 border-b z-50`}>
       {/* Logo + Theme Switcher */}
@@ -73,11 +78,10 @@ const Navbar = ({ currentTheme, handleThemeChange }: NavbarProps) => {
 
       {/* Mobile Menu (slides from right) */}
       <div
-        className={`fixed top-0 right-0 h-full w-1/2 bg-white text-sky-700 shadow-xl transform transition-transform duration-300 ease-in-out z-50 md:hidden ${
+        className={`fixed top-0 right-0 h-full w-1/2 shadow-xl transform transition-transform duration-300 ease-in-out z-50 md:hidden ${mobileMenuBg} ${mobileMenuText} ${
           menuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        {/* Removed the separate close button from here, as the animating hamburger/X button will now handle closing */}
         <ul className="text-lg divide-y p-4 mt-[50px]">
           <li className="px-4 py-3 hover:bg-gray-100 rounded">
             <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>

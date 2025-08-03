@@ -25,16 +25,16 @@ const Layout = ({ children }: LayoutProps) => {
   if (currentTheme === 'Dark') {
     bgTheme = 'bg-[#000027]';
     textTheme = 'text-white';
-    fontFamily = 'serif';
+    fontFamily = 'Bree Serif';
   } else if (currentTheme === 'Modern') {
     bgTheme = 'bg-[#ffde22]';
     textTheme = 'text-black';
     fontFamily = '"Pacifico", cursive';
   }
   return (
-   <div className={`${currentTheme == 'Dark' ? 'bg-white' : '' } ${currentTheme == 'Modern' ? 'bg-white' : '' } bg-white`}>
+   <div >
      <div
-      className={`relative flex min-h-screen flex-col justify-between overflow-x-hidden ${bgTheme} ${textTheme} m-1 rounded-xl`}
+      className={`relative flex min-h-screen flex-col justify-between overflow-x-hidden ${bgTheme} ${textTheme}`}
       style={{ fontFamily }}
     >
       <Navbar currentTheme={currentTheme} handleThemeChange={handleThemeChange} />

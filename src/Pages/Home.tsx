@@ -21,18 +21,15 @@ const Home = () => {
 
 
   useEffect(() => {
-    console.log('Current theme from Redux:', currentTheme);
-    if (currentTheme == 'Minimalist') {
-      setBgTheme('bg-[#ffffff]')
-      setTextTheme('text-black')
-    }
-    else if (currentTheme == 'Dark') {
-      setBgTheme('bg-[#000027]')
-      setTextTheme('text-white')
-    }
-    else if (currentTheme == 'Modern') {
-      setBgTheme('bg-[#ffde22]')
-      setTextTheme('text-black')
+    if (currentTheme === "Minimalist") {
+      setBgTheme("bg-white");
+      setTextTheme("text-black");
+    } else if (currentTheme === "Dark") {
+      setBgTheme("bg-[#000027]");
+      setTextTheme("text-white");
+    } else if (currentTheme === "Modern") {
+      setBgTheme("bg-[#ffde22]");
+      setTextTheme("text-black");
     }
   }, [currentTheme]);
 
@@ -79,7 +76,7 @@ const Home = () => {
       <div>
         <Navbar currentTheme={currentTheme} handleThemeChange={handleThemeChange} />
 
-        <div className="flex flex-col md:flex-row w-full h-[100vh] p-6 gap-4 items-center justify-center bg-sky-50 transition-colors duration-500">
+        <div className={`flex flex-col md:flex-row w-full h-[100vh] p-6 gap-4 items-center justify-center ${BgTheme} ${TextTheme} transition-colors duration-500`}>
           {/* Left Side: Heading and Text */}
           <div className="flex-1 flex flex-col justify-center items-start p-6 animate-fade-in">
             <h1
@@ -94,15 +91,13 @@ const Home = () => {
               Minimal, Dark, and Modern styles — tailor your interface to your mood,
               your vibe, your way.
             </p>
-            <button className="bg-[#3490f3] rounded px-6 py-3 text-white text-sm font-bold hover:bg-[#2779bd] transition-colors duration-300">
-              Get Started
-            </button>
+           <button type="button" className="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Get Started</button>
           </div>
 
           {/* Right Side: Background Image */}
           <div
-            className={`flex-1 rounded-xl bg-center bg-no-repeat bg-cover w-full h-[300px] md:h-[80%] transition-all duration-700 ease-in-out ${currentTheme === "Dark"
-                ? "bg-[url('/dark.svg')]"
+            className={`mt-[-50px] flex-1 rounded-xl bg-center bg-no-repeat bg-cover w-full h-[300px] md:h-[80%] transition-all duration-700 ease-in-out ${currentTheme === "Dark"
+                ? "bg-[url('/Dark.svg')]"
                 : currentTheme === "Modern"
                   ? "bg-[url('/Modern.svg')]"
                   : "bg-[url('/Minimal.svg')]"

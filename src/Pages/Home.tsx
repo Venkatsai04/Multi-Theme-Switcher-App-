@@ -57,11 +57,11 @@ const Home = () => {
         </div>
 
         <div
-          className={`mt-[-120px] flex-1 rounded-xl bg-center bg-no-repeat bg-cover w-full h-[300px] md:h-[80%] transition-all duration-700 ease-in-out ${currentTheme === "Dark"
+          className={`mt-[-120px] flex-1 rounded-xl bg-center bg-no-repeat bg-cover w-full h-[400px] md:h-[80%] transition-all duration-700 ease-in-out ${currentTheme === "Dark"
               ? "bg-[url('/Dark.svg')]"
               : currentTheme === "Modern"
                 ? "bg-[url('/Modern.svg')]"
-                : "bg-[url('/Minimal.svg')]"
+                : "bg-[url('/Minimal.png')]"
             }`}
         ></div>
       </div>

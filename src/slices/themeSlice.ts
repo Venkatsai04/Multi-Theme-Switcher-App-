@@ -1,5 +1,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
+//export TODO
 export type ThemeName = 'Minimalist' | 'Dark' | 'Modern';
 
 interface ThemeState {

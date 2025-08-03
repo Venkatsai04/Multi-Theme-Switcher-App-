@@ -12,7 +12,6 @@ const Layout = ({ children }: LayoutProps) => {
   const dispatch = useDispatch();
   const currentTheme = useSelector((state: RootState) => state.theme.currentTheme);
   
-  // Handlers for theme logic
   const handleThemeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selected = e.target.value as ThemeName;
     dispatch(setTheme(selected));

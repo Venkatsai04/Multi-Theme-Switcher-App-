@@ -6,11 +6,10 @@ import Product from '../components/Product';
 const Home = () => {
   const currentTheme = useSelector((state: RootState) => state.theme.currentTheme);
   
-  // Remove useState and useEffect for BgTheme and TextTheme.
-  // The global layout now handles this.
+
+  //products fetched from API
 
   const products = [
-    // ... (Your products array is unchanged)
     {
       title: 'Product 1',
       price: '$29.99 · ★ 4.5',
@@ -40,7 +39,7 @@ const Home = () => {
   return (
     <div>
       <div className={`flex flex-col md:flex-row w-full h-[100vh] p-6 gap-4 items-center justify-center transition-colors duration-500 `}>
-        {/* Left Side: Heading and Text */}
+     
         <div className="flex-1 flex flex-col justify-center items-start p-6 animate-fade-in mt-[-100px]">
           <h1
             className="text-4xl md:text-5xl font-black leading-tight tracking-[-0.03em] mb-4 transition-colors duration-500"
@@ -57,7 +56,6 @@ const Home = () => {
           <button type="button" className="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Get Started</button>
         </div>
 
-        {/* Right Side: Background Image */}
         <div
           className={`mt-[-120px] flex-1 rounded-xl bg-center bg-no-repeat bg-cover w-full h-[300px] md:h-[80%] transition-all duration-700 ease-in-out ${currentTheme === "Dark"
               ? "bg-[url('/Dark.svg')]"

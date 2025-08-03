@@ -5,7 +5,6 @@ import type { RootState } from '../store';
 const Contact = () => {
   const currentTheme = useSelector((state: RootState) => state.theme.currentTheme);
 
-  // Derive colors from the Redux state
   let textColor = 'text-[#121417]';
   let placeholderColor = 'placeholder:text-[#677583]';
   let inputBorderColor = 'border-[#dde0e4]';

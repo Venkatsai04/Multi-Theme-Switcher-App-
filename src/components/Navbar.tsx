@@ -10,7 +10,6 @@ interface NavbarProps {
 const Navbar = ({ currentTheme, handleThemeChange }: NavbarProps) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Derive the colors for the dropdown based on the current theme
   const dropdownBg = currentTheme === 'Dark' ? 'bg-[#000027]' : 'bg-white';
   const dropdownText = currentTheme === 'Dark' ? 'text-white' : 'text-black';
   const dropdownBorder = currentTheme === 'Dark' ? 'border-white' : 'border-[#dde0e4]';
@@ -33,14 +32,14 @@ const Navbar = ({ currentTheme, handleThemeChange }: NavbarProps) => {
         </select>
       </div>
 
-      {/* Desktop Nav */}
+     
       <div className="hidden md:flex gap-6 font-medium">
         <Link to="/" className="hover:bg-yellow-500 p-2 rounded-xl">Home</Link>
         <Link to="/about" className="hover:bg-yellow-500 p-2 rounded-xl">About</Link>
         <Link to="/contact" className="hover:bg-yellow-500 p-2 rounded-xl">Contact</Link>
       </div>
 
-      {/* Hamburger Button */}
+
       <button onClick={() => setMenuOpen(!menuOpen)} className="relative group md:hidden z-30">
         <div className="relative z-20 flex items-center justify-center rounded-full w-[50px] h-[50px] transition-all bg-sky-400 ring-0 ring-gray-300 hover:ring-8 focus:ring-8 ring-opacity-30 duration-200 shadow-md">
           <div
@@ -62,7 +61,7 @@ const Navbar = ({ currentTheme, handleThemeChange }: NavbarProps) => {
           </div>
         </div>
 
-        {/* Animated Dropdown Menu */}
+        
         <div
           className={`absolute right-0 top-16 bg-white text-sky-700 shadow-xl rounded-md origin-top-right transform transition-all duration-300 ease-in-out ${
             menuOpen

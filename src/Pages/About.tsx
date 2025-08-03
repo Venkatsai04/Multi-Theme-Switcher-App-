@@ -5,7 +5,7 @@ import {type RootState } from '../store';
 const About = () => {
   const currentTheme = useSelector((state: RootState) => state.theme.currentTheme);
 
-  // Derive colors from the Redux state
+ 
   let textColor = 'text-[#121417]';
   let secondaryTextColor = 'text-[#677583]';
   let borderColor = 'border-white';
@@ -36,13 +36,12 @@ const About = () => {
         </div>
       </div>
 
-      {/* Main Content */}
       <h1 className={`${textColor} text-4xl md:text-5xl font-black leading-tight tracking-[-0.03em] mb-4 p-4`}>
         About SwitchX
       </h1>
 
       <div className="md:grid md:grid-cols-2 md:gap-8 px-4">
-        {/* Section: Our Mission */}
+     
         <div>
           <Section title="Our Vision" textColor={textColor} secondaryTextColor={secondaryTextColor}>
             <p>
@@ -51,7 +50,7 @@ const About = () => {
           </Section>
         </div>
 
-        {/* Section: The Technology */}
+    
         <div>
           <Section title="The Technology" textColor={textColor} secondaryTextColor={secondaryTextColor}>
             <p>
@@ -61,7 +60,7 @@ const About = () => {
         </div>
       </div>
 
-      {/* Team Section */}
+ 
       <div className="mt-8 px-4">
         <h2 className={`${textColor} text-[22px] font-bold leading-tight tracking-[-0.015em] pb-3 pt-5`}>
           Meet the Creator

@@ -29,7 +29,7 @@ const Contact = () => {
 
   return (
     <div>
-      <div>
+      <div className='mt-[100px]'>
        
         <h2 className={`${textColor} text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5`}>
           Contact Us

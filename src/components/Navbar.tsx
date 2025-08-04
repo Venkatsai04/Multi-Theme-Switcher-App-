@@ -44,8 +44,8 @@ const Navbar = ({ currentTheme, handleThemeChange }: NavbarProps) => {
         <Link to="/contact" className="hover:bg-yellow-500 p-2 rounded-xl">Contact</Link>
       </div>
 
-      {/* Hamburger Button for Mobile */}
-      {/* Increased z-index to ensure it's always visible above the sliding menu */}
+  
+     {/* navbar */}
       <button onClick={() => setMenuOpen(!menuOpen)} className="relative group md:hidden z-[60]"> {/* Changed z-30 to z-[60] */}
         <div className="relative z-20 flex items-center justify-center rounded-full w-[50px] h-[50px] transition-all bg-sky-400 ring-0 ring-gray-300 hover:ring-8 focus:ring-8 ring-opacity-30 duration-200 shadow-md">
           <div

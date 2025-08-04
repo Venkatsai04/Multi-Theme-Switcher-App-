@@ -41,12 +41,10 @@ const Product: React.FC<ProductProps> = ({ title, price, image, layout, index })
   
   let productLayoutClasses = '';
   if (layout === 'Dark') {
-    // Repeating pattern: large card, then two small cards
     if (index % 3 === 0) {
       productLayoutClasses = 'lg:col-span-2';
     }
   } else if (layout === 'Modern') {
-    // Repeating pattern: a large card, followed by three small cards
     if (index % 4 === 0) {
       productLayoutClasses = 'lg:col-span-2';
     }

@@ -40,16 +40,13 @@ const Home = () => {
     fetchProducts();
   }, []);
 
-  // Set the base grid structure for each theme
+  //  base grid structure for each theme
   let layoutClasses = "grid grid-cols-1 sm:grid-cols-2 gap-6 p-4 ";
   if (currentTheme === "Minimalist") {
-    // Symmetrical 3-column grid
     layoutClasses += " lg:grid-cols-3";
   } else if (currentTheme === "Dark") {
-    // A 2-column grid for the custom layout
     layoutClasses += " lg:grid-cols-2";
   } else if (currentTheme === "Modern") {
-    // A 3-column grid for the custom layout
     layoutClasses += " lg:grid-cols-3";
   }
 
